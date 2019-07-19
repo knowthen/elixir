@@ -8,6 +8,27 @@ defmodule Election do
     next_id: 3
   )
   
+  def run() do
+    %Election{} |> run()
+  end
+  
+  def run(:quit), do: :quit
+  
+  def run(election = %Election{}) do
+    [IO.ANSI.clear(), IO.ANSI.cursor(0, 0)]
+    |> IO.write()
+    
+    election
+    |> view
+    |> IO.write()
+    
+    command = IO.gets(">")
+    
+    election
+    |> update(command)
+    |> run()
+  end
+  
   def update(election, cmd) when is_binary(cmd) do
     update(election, String.split(cmd))
   end
@@ -27,6 +48,8 @@ defmodule Election do
   def update(election, ["v" <> _, id]) do
     vote(election, Integer.parse(id))
   end
+  
+   def update(_election, ["q" <> _]), do: :quit
 
   defp vote(election, {id, ""}) do
     candidates = Enum.map(election.candidates, &maybe_inc_vote(&1, id))
