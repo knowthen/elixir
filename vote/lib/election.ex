@@ -8,6 +8,11 @@ defmodule Election do
     next_id: 3
   )
   
+  def update(election, ["n" <> _ | args]) do
+    name = Enum.join(args, " ")
+    Map.put(election, :name, name)
+  end
+  
   def view_header(election) do
     [
       "Election for: #{election.name}\n"
