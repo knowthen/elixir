@@ -8,6 +8,17 @@ defmodule Election do
     next_id: 3
   )
   
+  def update(election, cmd) when is_binary(cmd) do
+    update(election, String.split(cmd))
+  end
+  
+  def update(election, ["a" <> _ | args]) do
+    name = Enum.join(args, " ")
+    candidate = Candidate.new(election.next_id, name)
+    candidates = [candidate | election.candidates]
+    %{election | candidates: candidates, next_id: election.next_id + 1}
+  end
+  
   def update(election, ["n" <> _ | args]) do
     name = Enum.join(args, " ")
     Map.put(election, :name, name)
