@@ -24,6 +24,27 @@ defmodule Election do
     Map.put(election, :name, name)
   end
   
+  def update(election, ["v" <> _, id]) do
+    vote(election, Integer.parse(id))
+  end
+
+  defp vote(election, {id, ""}) do
+    candidates = Enum.map(election.candidates, &maybe_inc_vote(&1, id))
+    Map.put(election, :candidates, candidates)
+  end
+  
+  defp vote(election, _errors), do: election
+
+  defp maybe_inc_vote(candidate, id) when is_integer(id) do
+    maybe_inc_vote(candidate, candidate.id == id)
+  end
+
+  defp maybe_inc_vote(candidate, _inc_vote = false), do: candidate
+
+  defp maybe_inc_vote(candidate, _inc_vote = true) do
+    Map.update!(candidate, :votes, &(&1 + 1))
+  end
+  
   def view_header(election) do
     [
       "Election for: #{election.name}\n"
