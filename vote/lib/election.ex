@@ -1,11 +1,8 @@
 defmodule Election do
   defstruct(
-    name: "Mayor",
-    candidates: [
-      Candidate.new(1, "Will Ferrel"),
-      Candidate.new(2, "Kristen Wiig")
-    ],
-    next_id: 3
+    name: "",
+    candidates: [ ],
+    next_id: 1
   )
   
   def run() do
@@ -29,6 +26,31 @@ defmodule Election do
     |> run()
   end
   
+  @doc """
+  Updates Election Struct, based on provided command.
+
+  ## Parameters
+
+    - election: Election Struct
+    - cmd: String based command. Each command can be shortened to what's shown 
+      in parenthesis.
+      - (n)ame command updates the election name
+        - example: "n Mayor"
+      - (a)dd command adds a new candidate
+        - example: "a Will Ferrell"
+      - (v)ote command increments the vote count for candidate
+        - example: "v 1"
+      - (q)uit command returns a quit atom
+        - example: "q"
+
+  Returns `Election` struct
+
+  ## Examples
+
+      iex> %Election{} |> Election.update("n Mayor")
+      %Election{name: "Mayor"}
+      
+  """
   def update(election, cmd) when is_binary(cmd) do
     update(election, String.split(cmd))
   end
