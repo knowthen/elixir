@@ -1,6 +1,30 @@
 defmodule Counter do
   use GenServer
   
+  # Public API
+
+  def start_link(initial_count) do
+    GenServer.start_link(__MODULE__, initial_count)
+  end
+  
+  def increment(pid) do
+    GenServer.call(pid, :inc)
+  end
+  
+  def decrement(pid) do
+    GenServer.call(pid, :dec)
+  end
+  
+  def current(pid) do
+    GenServer.call(pid, :current)
+  end
+  
+  def divide(pid, divisor) do
+    GenServer.call(pid, {:divide, divisor})
+  end
+
+  # GenServer Callbacks
+  
   def init(initial_count) do
     {:ok, initial_count}
   end
@@ -17,6 +41,10 @@ defmodule Counter do
   
   def handle_call(:current, _from, count) do
     {:reply, count, count}
+  end
+  
+  def handle_call({:divide, divisor}, _from, count) do
+    {:reply, div(count, divisor), count}
   end
   
 end
