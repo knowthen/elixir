@@ -1,4 +1,5 @@
 defmodule Counter do
+  use GenServer
   
   def init(initial_count) do
     {:ok, initial_count}
