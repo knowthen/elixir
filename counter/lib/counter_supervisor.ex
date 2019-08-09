@@ -7,6 +7,7 @@ defmodule CounterSupervisor do
   
   def init(init_args) do
     children = [
+      Cache,
       {Counter, init_args}
     ]
     

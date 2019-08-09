@@ -26,6 +26,12 @@ defmodule Counter do
   # GenServer Callbacks
   
   def init(initial_count) do
+    initial_count =
+      case Cache.lookup(__MODULE__) do
+        {:ok, count} -> count
+        :error -> initial_count
+      end
+      
     {:ok, initial_count}
   end
   
@@ -45,6 +51,10 @@ defmodule Counter do
   
   def handle_call({:divide, divisor}, _from, count) do
     {:reply, div(count, divisor), count}
+  end
+  
+  def terminate(_reason, count) do
+    Cache.save(__MODULE__, count)
   end
   
 end
