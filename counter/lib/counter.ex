@@ -3,8 +3,10 @@ defmodule Counter do
   
   # Public API
 
-  def start_link(initial_count) do
-    GenServer.start_link(__MODULE__, initial_count)
+  def start_link(args) do
+    initial_count = Keyword.get(args, :initial_count, 0)
+    name = Keyword.get(args, :name)
+    GenServer.start_link(__MODULE__, initial_count, name: name)
   end
   
   def increment(pid) do
@@ -26,8 +28,9 @@ defmodule Counter do
   # GenServer Callbacks
   
   def init(initial_count) do
+    {:registered_name, name} = Process.info(self(), :registered_name)
     initial_count =
-      case Cache.lookup(__MODULE__) do
+      case Cache.lookup(name) do
         {:ok, count} -> count
         :error -> initial_count
       end
@@ -54,7 +57,8 @@ defmodule Counter do
   end
   
   def terminate(_reason, count) do
-    Cache.save(__MODULE__, count)
+    {:registered_name, name} = Process.info(self(), :registered_name)
+    Cache.save(name, count)
   end
   
 end
