@@ -1,0 +1,26 @@
+<h1>Listing Districts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for district <- @districts do %>
+    <tr>
+      <td><%= district.name %></td>
+
+      <td>
+        <%= link "Show", to: Routes.district_path(@conn, :show, district) %>
+        <%= link "Edit", to: Routes.district_path(@conn, :edit, district) %>
+        <%= link "Delete", to: Routes.district_path(@conn, :delete, district), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New District", to: Routes.district_path(@conn, :new) %></span>

@@ -1,0 +1,5 @@
+<h1>Edit District</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.district_path(@conn, :update, @district)) %>
+
+<span><%= link "Back", to: Routes.district_path(@conn, :index) %></span>

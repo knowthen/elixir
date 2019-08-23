@@ -1,0 +1,13 @@
+<h1>Show District</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @district.name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.district_path(@conn, :edit, @district) %></span>
+<span><%= link "Back", to: Routes.district_path(@conn, :index) %></span>
