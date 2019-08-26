@@ -14,6 +14,16 @@ defmodule Poller.PollServer do
     GenServer.call(name, {:add_question, question})
   end
   
+  def vote(district_id, choice_id) do
+    name = district_name(district_id)
+    GenServer.call(name, {:add_vote, choice_id})
+  end
+
+  def get_poll(district_id) do
+    name = district_name(district_id)
+    GenServer.call(name, :get)
+  end  
+  
   # Callbacks
   
   def init(district_id) do
@@ -25,4 +35,14 @@ defmodule Poller.PollServer do
     poll = Poll.add_question(poll, question)
     {:reply, poll, poll}
   end
+  
+  def handle_call({:add_vote, choice_id}, _from, poll) do
+    poll = Poll.vote(poll, choice_id)
+    {:reply, poll, poll}
+  end
+
+  def handle_call(:get, _from, poll) do
+    {:reply, poll, poll}
+  end
+  
 end
