@@ -1,18 +1,12 @@
 defmodule PollerDal do
-  @moduledoc """
-  Documentation for PollerDal.
-  """
+  use Application
 
-  @doc """
-  Hello world.
+  def start(_type, _args) do
+    children = [
+      {PollerDal.Repo, []}
+    ]
 
-  ## Examples
-
-      iex> PollerDal.hello()
-      :world
-
-  """
-  def hello do
-    :world
+    opts = [strategy: :one_for_one, name: PollerDal.Supervisor]
+    Supervisor.start_link(children, opts)
   end
 end
