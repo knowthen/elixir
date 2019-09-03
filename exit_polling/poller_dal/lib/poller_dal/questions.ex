@@ -12,12 +12,29 @@ defmodule PollerDal.Questions do
   end
   
   # TODO: write `create_question/1` function
+  def create_question(attrs) do
+    %Question{}
+    |> Question.changeset(attrs)
+    |> Repo.insert()
+  end
 
   # TODO: write `update_question/2` function
+  def update_question(%Question{} = question, attrs) do
+    question
+    |> Question.changeset(attrs)
+    |> Repo.update()
+  end
 
   # TODO: write `delete_question/1` function
+  def delete_question(%Question{} = question) do
+    Repo.delete(question)
+  end
 
   # TODO: write `list_questions/0` function
+  def list_questions do
+    Question |> preload(:district) |> Repo.all()
+  end
 
   # TODO: write `get_question!/1` function
+  def get_question!(id), do: Repo.get!(Question, id)
 end
