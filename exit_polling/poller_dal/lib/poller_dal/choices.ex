@@ -1,19 +1,50 @@
 defmodule PollerDal.Choices do
+  import Ecto.Query
+  alias PollerDal.Repo
 
-  # TODO: write `list_choices/0` function
+  alias PollerDal.Choices.Choice
 
-  # TODO: write `list_choices_by_question_id/1` function
+  def list_choices do
+    Repo.all(Choice)
+  end
 
-  # TODO: write `list_choices_by_choice_ids/1` function
-  
-  # TODO: write `get_choice!/1` function
+  def list_choices_by_question_id(question_id) do
+    from(
+      c in Choice,
+      where: c.question_id == ^question_id
+    )
+    |> Repo.all()
+  end
 
-  # TODO: write `create_choice/1` function
+  def list_choices_by_choice_ids(choice_ids) do
+    from(
+      c in Choice,
+      where: c.id in ^choice_ids
+    )
+    |> Repo.all()
+  end
 
-  # TODO: write `update_choice/1` function
+  def get_choice!(id) do
+    Repo.get!(Choice, id)
+  end
 
-  # TODO: write `delete_choice/1` function
+  def create_choice(attrs) do
+    %Choice{}
+    |> Choice.changeset(attrs)
+    |> Repo.insert()
+  end
 
-  # TODO: write `change_choice/1` function
-  
+  def update_choice(%Choice{} = choice, attrs) do
+    choice
+    |> Choice.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_choice(%Choice{} = choice) do
+    Repo.delete(choice)
+  end
+
+  def change_choice(%Choice{} = choice) do
+    Choice.changeset(choice, %{})
+  end
 end
