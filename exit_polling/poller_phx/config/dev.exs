@@ -65,3 +65,11 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :poller_dal, PollerDal.Repo,
+  database: "poller_#{Mix.env()}",
+  username: "knowthen",
+  password: "",
+  hostname: "localhost"
+  
+config :poller_dal, ecto_repos: [PollerDal.Repo]
