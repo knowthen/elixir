@@ -45,4 +45,13 @@ defmodule PollerPhxWeb.DistrictController do
     changeset = Districts.change_district(district)
     render(conn, "edit.html", district: district, changeset: changeset)
   end
+  
+  def delete(conn, %{"id" => id}) do
+    district = Districts.get_district!(id)
+    {:ok, _district} = Districts.delete_district(district)
+    
+    conn
+    |> put_flash(:info, "District deleted successfully.")
+    |> redirect(to: Routes.district_path(conn, :index))
+  end
 end

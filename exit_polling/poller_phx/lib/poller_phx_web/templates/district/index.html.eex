@@ -10,8 +10,20 @@
     <%= for district <- @districts do %>
       <tr>
         <td><%= district.name %></td>
-        <td>...</td>
+        <td>
+          <%= link to: Routes.district_path(@conn, :edit, district.id) do %>
+            <i class="far fa-edit"></i>
+          <% end %>
+          <%= link to: Routes.district_path(@conn, :delete, district.id), 
+                method: :delete, 
+                data: [confirm: "Are you sure?"] do %>
+              <i class="fas fa-trash"></i>
+            <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<div>
+  <%= link "New District", to: Routes.district_path(@conn, :new), class: "btn" %>
+</div>
