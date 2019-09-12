@@ -1,0 +1,4 @@
+<h1>Edit Question for <%= @district.name %></h1>
+
+<%= render "form.html", 
+  Map.put(assigns, :action, Routes.question_path(@conn, :update, @district.id, @question)) %>

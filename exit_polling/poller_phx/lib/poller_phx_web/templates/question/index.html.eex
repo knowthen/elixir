@@ -10,7 +10,16 @@
     <%= for question <- @questions do %>
       <tr>
         <td><%= question.description %></td>
-        <td>...</td>
+        <td>
+          <%= link to: Routes.question_path(@conn, :edit, @district.id, question) do %>
+            <i class="far fa-edit"></i>
+          <% end %>
+          <%= link to: Routes.question_path(@conn, :delete, @district.id, question), 
+            method: :delete, 
+            data: [confirm: "Are you sure?"] do %>
+            <i class="fas fa-trash"></i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
