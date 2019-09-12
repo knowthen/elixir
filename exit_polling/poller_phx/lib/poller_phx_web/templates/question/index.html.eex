@@ -1,0 +1,17 @@
+<h1>Poll Questions for <%= @district.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for question <- @questions do %>
+      <tr>
+        <td><%= question.description %></td>
+        <td>...</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

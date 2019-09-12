@@ -11,6 +11,9 @@
       <tr>
         <td><%= district.name %></td>
         <td>
+          <%= link to: Routes.question_path(@conn, :index, district.id) do %>
+            <i class="fas fa-question"></i>
+          <% end %>
           <%= link to: Routes.district_path(@conn, :edit, district.id) do %>
             <i class="far fa-edit"></i>
           <% end %>
