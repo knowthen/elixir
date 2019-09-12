@@ -15,3 +15,7 @@
     <% end %>
   </tbody>
 </table>
+<div>
+  <%= link "New Question", to: Routes.question_path(@conn, :new, @district.id), class: "btn" %>
+  <%= link "Back", to: Routes.district_path(@conn, :index), class: "btn-white" %>
+</div>
