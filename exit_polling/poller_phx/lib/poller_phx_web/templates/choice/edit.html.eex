@@ -1,0 +1,4 @@
+<h1>Edit Choice</h1>
+
+<%= render "form.html", 
+  Map.put(assigns, :action, Routes.choice_path(@conn, :update, @district.id, @question.id, @choice)) %>

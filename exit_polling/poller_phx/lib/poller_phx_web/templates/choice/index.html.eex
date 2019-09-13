@@ -1,0 +1,43 @@
+<h1>Choices for <%= @question.description %> in <%= @district.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Choice</th>
+      <th>Party</th>
+      <th>Votes</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for choice <- @choices do %>
+    <tr >
+      <td><%= choice.description %></td>
+      <td><%= party_description(choice.party) %></td>
+      <td><%= choice.votes %></td>
+
+      <td>
+        <%= link to: Routes.choice_path(@conn, :edit, 
+          @district.id, @question.id, choice) do %>
+          <i class="far fa-edit"></i>
+        <% end %>
+        <%= link to: Routes.choice_path(@conn, :delete, @district.id, 
+          @question.id, choice), method: 
+          :delete, 
+          data: [confirm: "Are you sure?"] do %>
+          <i class="fas fa-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<div>
+  <%= link "New Choice", 
+    to: Routes.choice_path(@conn, :new, @district.id, @question.id), 
+    class: "btn" %>
+  <%= link "Back", 
+    to: Routes.question_path(@conn, :index, @district.id), 
+    class: "btn-white" %>
+</div>

@@ -47,4 +47,8 @@ defmodule PollerDal.Choices do
   def change_choice(%Choice{} = choice) do
     Choice.changeset(choice, %{})
   end
+  
+  defdelegate parties, to: Choice
+  defdelegate party_ids, to: Choice
+  defdelegate party_description(id), to: Choice
 end

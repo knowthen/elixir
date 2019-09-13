@@ -1,0 +1,23 @@
+<h3>District: <%=@district.name%></h3>
+<h3>Question: <%=@question.description%></h3>
+
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="error">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :description %>
+  <%= text_input f, :description %>
+  <%= error_tag f, :description %>
+
+  <%= label f, :party %>
+  <%= select f, :party, choice_party_options() %>
+  <%= error_tag f, :party %>
+
+  <div>
+    <%= submit "Save", class: "btn" %>
+    <%= link "Back", to: Routes.choice_path(@conn, :index, @district.id, @question.id) , class: "btn-white"%>
+  </div>
+<% end %>
