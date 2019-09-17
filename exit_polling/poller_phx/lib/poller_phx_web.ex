@@ -50,6 +50,7 @@ defmodule PollerPhxWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import PollerPhxWeb.Plugs.Auth, only: [valid_user: 2, admin_user: 2]
     end
   end
 
