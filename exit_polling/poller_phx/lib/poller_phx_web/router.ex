@@ -19,6 +19,13 @@ defmodule PollerPhxWeb.Router do
     get "/", PageController, :index
   end
   
+  scope "/auth", PollerPhxWeb do
+    pipe_through :browser
+    
+    get "/login", AuthController, :new
+    post "/login", AuthController, :create
+  end
+  
   scope "/districts", PollerPhxWeb do
     pipe_through :browser
     

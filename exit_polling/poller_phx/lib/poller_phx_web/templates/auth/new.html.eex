@@ -1,0 +1,12 @@
+<section>
+  <div class="login"> 
+    <h1>Login</h1>
+    <%= form_for @conn, Routes.auth_path(@conn, :create), fn f -> %>
+      <label>Email</label>
+      <%= text_input f, :email %>
+      <label>Password</label>
+      <%= password_input f, :password %>
+      <%= submit "Log in" %>
+    <% end %>
+  </div>
+</section>
