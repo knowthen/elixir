@@ -40,7 +40,8 @@ defmodule PollerPhxWeb.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_poller_phx_key",
-    signing_salt: "uMHxWgy0"
+    signing_salt: "uMHxWgy0",
+    max_age: 365 * 24 * 60 * 60
 
   plug PollerPhxWeb.Router
 end

@@ -10,17 +10,7 @@
   </head>
   <body>
     <header>
-      <nav>
-        <div>
-          <a href="/">POLLER</a>
-        </div>
-        <div>
-          <div>
-            <a>Login</a>
-          </div>
-        </div>
-      </nav>
-
+      <%= render PollerPhxWeb.LayoutView, "_nav.html", assigns %>
     </header>
     <section>
       <main role="main" class="container">

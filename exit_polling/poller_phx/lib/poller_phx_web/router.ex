@@ -25,6 +25,7 @@ defmodule PollerPhxWeb.Router do
     
     get "/login", AuthController, :new
     post "/login", AuthController, :create
+    delete "/logout", AuthController, :delete
   end
   
   scope "/districts", PollerPhxWeb do
