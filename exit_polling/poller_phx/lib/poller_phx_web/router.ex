@@ -42,5 +42,6 @@ defmodule PollerPhxWeb.Router do
     
     get "/districts", DistrictController, :index
     get "/districts/:district_id", DistrictController, :show
+    get "/districts/:district_id/questions", QuestionController, :index
   end
 end
