@@ -41,5 +41,6 @@ defmodule PollerPhxWeb.Router do
     pipe_through :api
     
     get "/districts", DistrictController, :index
+    get "/districts/:district_id", DistrictController, :show
   end
 end
