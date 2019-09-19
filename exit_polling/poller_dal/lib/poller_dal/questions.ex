@@ -8,6 +8,7 @@ defmodule PollerDal.Questions do
       q in Question,
       where: q.district_id == ^district_id
     )
+    |> preload(:choices)
     |> Repo.all()
   end
   
