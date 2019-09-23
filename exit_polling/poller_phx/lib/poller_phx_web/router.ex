@@ -53,4 +53,9 @@ defmodule PollerPhxWeb.Router do
     
     put "/districts/:district_id/choices/:choice_id", ChoiceController, :vote
   end
+  
+  scope "/app", PollerPhxWeb do
+    pipe_through :browser
+    get "/*path", AppController, :index
+  end
 end

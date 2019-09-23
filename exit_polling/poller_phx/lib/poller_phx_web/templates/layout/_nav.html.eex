@@ -7,6 +7,10 @@
       <%= if @current_user && @current_user.admin do %>
         <%= link "Districts", to: Routes.district_path(@conn, :index) %>
       <% end %>
+      <%= if @current_user do %>
+        <%= link "Poll", to: Routes.app_path(@conn, :index, ["polls"])  %>
+      <% end %>
+      <%= link "Results", to: Routes.app_path(@conn, :index, ["results"])  %>
     </div>
     <div>
       <%= if @current_user do %>

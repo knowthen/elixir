@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Exit Polling</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  </head>
+  <body>
+    <header>
+      <%= render PollerPhxWeb.LayoutView, "_nav.html", assigns %>
+    </header>
+    <section>
+      <main role="main" class="container">
+        <div id="app"></div>
+      </main>
+    </section>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/poll.js") %>"></script>
+  </body>
+</html>
