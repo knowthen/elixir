@@ -53,4 +53,22 @@ export const pollResultEffects = (districtId, dispatch) => () => {
     dispatch(districtUpdateMsg(district)),
   );
   // TODO: connect phoenix channel
+  const socket = new Socket('/socket');
+  socket.connect();
+  const channel = socket.channel(`district:${districtId}`);
+  channel
+    .join()
+    .receive('ok', joinData => {
+      console.log('join data', joinData);
+    })
+    .receive('error', reason => {
+      console.log({reason});
+    });
+  channel.on('msg', ({msg}) => {
+    console.log('msg', msg);
+  });
+  return () => {
+    channel.leave();
+    socket.disconnect();
+  };
 };
