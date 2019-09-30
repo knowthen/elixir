@@ -58,14 +58,14 @@ export const pollResultEffects = (districtId, dispatch) => () => {
   const channel = socket.channel(`district:${districtId}`);
   channel
     .join()
-    .receive('ok', joinData => {
-      console.log('join data', joinData);
+    .receive('ok', ({poll}) => {
+      dispatch(pollMsg(poll));
     })
     .receive('error', reason => {
       console.log({reason});
     });
-  channel.on('msg', ({msg}) => {
-    console.log('msg', msg);
+  channel.on('district_update', ({choice_id, votes}) => {
+    dispatch(voteUpdateMsg(choice_id, votes));
   });
   return () => {
     channel.leave();

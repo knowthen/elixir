@@ -1,6 +1,6 @@
 defmodule Poller.PollServer do
   use GenServer
-  alias Poller.Poll
+  alias Poller.{Poll, PubSub}
   alias PollerDal.{Questions, Choices}
   
   @save_time 10 * 60 * 1000
@@ -50,11 +50,32 @@ defmodule Poller.PollServer do
   
   def handle_call({:add_vote, choice_id}, _from, poll) do
     poll = Poll.vote(poll, choice_id)
+    votes = Map.get(poll.votes, choice_id, 0)
+    PubSub.broadcast_district(poll.district_id, choice_id, votes)
     {:reply, poll, poll}
   end
 
   def handle_call(:get, _from, poll) do
-    {:reply, poll, poll}
+    questions =
+      for question <- poll.questions do
+        choices =
+          for choice <- question.choices do
+            votes = Map.get(poll.votes, choice.id, 0)
+            
+            choice
+            |> Map.from_struct()
+            |> Map.put(:votes, votes)
+          end
+          
+        question
+        |> Map.from_struct()
+        |> Map.put(:choices, choices)  
+      end
+    result = %{
+      district_id: poll.district_id,
+      questions: questions
+    }  
+    {:reply, result, poll}
   end
   
   def save_votes(poll) do
