@@ -284,24 +284,19 @@ Leading up to election day, there will be just a few users, setting up the
 master data... In other words, adding the voting districts, the questions to ask
 voters, and the valid choices for each question.
 
-  ![master data example](../src/images/elixir_exit_poll_master-data.png)
-  <span class="ml4 nt4 db z-4 relative f5 i gray">Voting district page (master
-  data example)</span>
+  ![master data example](https://knowthen.com/images/elixir_exit_poll_master-data.png)
 
 On election day, there will be a huge spike in usage. A small part of the usage
 spike will be from people conducting the exit polls, on their mobile phones.
 
-  ![Polling page example](../src/images/elixir_exit_poll_poll.png)
-  <span class="ml4 nt4 db z-4 relative f5 i gray">Polling page (example poll
-  question and choices)</span>
+  ![Polling page example](https://knowthen.com/images/elixir_exit_poll_poll.png)
 
 However, the vast majority of concurrent users will be pollsters, political
 campaigns and news organizations that will be monitoring the exit polling
 results all-day long. 
 
   ![Exit poll result page - updated in
-  real-time](../src/images/elixir_exit_poll_results.png) <span class="ml4 nt4 db
-  z-4 relative f5 i gray">Exit poll result page - updated in real-time</span>
+  real-time](https://knowthen.com/images/elixir_exit_poll_results.png) 
 
 So basically, there will be 3 parts to our final project: 
 1. An admin area for adding and maintaining master data.
